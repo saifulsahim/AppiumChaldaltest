@@ -47,8 +47,42 @@ public class AppiumBasics {
 		
 		//Open the Chaldal Application
         System.out.println("Application launched successfully");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
+		handleSplashScreen(driver, wait);
+		//Clicking the search button
+
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(AppiumBy.xpath("//android.widget.TextView[@text=\"Search\"]")));
+		driver.findElement(AppiumBy.xpath("//android.widget.TextView[@text=\"Search\"]")).click();
+
+		handleSplashScreen(driver, wait);
+
+		//Search for the item “toothbrush” 
+		driver.findElement(AppiumBy.xpath("//android.widget.EditText[@text=\"Search Products\"]"))
+				.sendKeys("toothbrush");
+		driver.hideKeyboard();
 		
+		// Scroll down to an item 
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator(
+				"new UiScrollable(new UiSelector().scrollable(true)).setMaxSearchSwipes(20).scrollIntoView(new UiSelector().text(\"Sensodyne Expert Brush\"));")));
+
+		driver.findElement(AppiumBy.androidUIAutomator(
+				"new UiScrollable(new UiSelector().scrollable(true)).setMaxSearchSwipes(20).scrollIntoView(new UiSelector().text(\"Sensodyne Expert Brush\"));"));
+
+		WebElement plusButton = driver.findElement(By.xpath(
+				"//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[5]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup"));
+
+	}
+	private static void handleSplashScreen(AndroidDriver driver, WebDriverWait wait) {
+		try {
+			wait.until(
+					ExpectedConditions.invisibilityOfElementLocated(By.id("com.chaldal.poached:id/action_bar_root")));
+			System.out.println("Splash screen bypassed.");
+		} catch (Exception e) {
+			System.out.println("No splash screen to handle.");
+		}
 	}
 
 }
