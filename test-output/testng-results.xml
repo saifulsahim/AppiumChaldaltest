@@ -2,12 +2,12 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-09-03T13:18:57 BDT" name="Default suite" finished-at="2024-09-03T13:20:49 BDT" duration-ms="112649">
+  <suite started-at="2024-09-03T13:33:57 BDT" name="Default suite" finished-at="2024-09-03T13:35:55 BDT" duration-ms="118074">
     <groups>
     </groups>
-    <test started-at="2024-09-03T13:18:57 BDT" name="Default test" finished-at="2024-09-03T13:20:49 BDT" duration-ms="112649">
+    <test started-at="2024-09-03T13:33:57 BDT" name="Default test" finished-at="2024-09-03T13:35:55 BDT" duration-ms="118074">
       <class name="saifulsahim.Appium.AppiumBasics">
-        <test-method signature="ChalDalAutomation()[pri:0, instance:saifulsahim.Appium.AppiumBasics@2e8c1c9b]" started-at="2024-09-03T13:18:57 BDT" name="ChalDalAutomation" finished-at="2024-09-03T13:20:49 BDT" duration-ms="112533" status="PASS">
+        <test-method signature="ChalDalAutomation()[pri:0, instance:saifulsahim.Appium.AppiumBasics@2e8c1c9b]" started-at="2024-09-03T13:33:57 BDT" name="ChalDalAutomation" finished-at="2024-09-03T13:35:55 BDT" duration-ms="118014" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- ChalDalAutomation -->

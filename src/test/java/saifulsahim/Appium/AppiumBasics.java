@@ -83,6 +83,26 @@ public class AppiumBasics {
 		WebElement cart = wait.until(ExpectedConditions
 				.elementToBeClickable(AppiumBy.xpath("(//android.widget.TextView[@text=\"৳579\"])[2]")));
 		cart.click();
+		
+		//Empty the cart
+
+				wait.until(
+						ExpectedConditions.visibilityOfElementLocated(By.xpath("(//android.widget.TextView[@text=\"\"])[1]")));
+				driver.findElement(By.xpath("(//android.widget.TextView[@text=\"\"])[1]")).click();
+
+				// Verify text "Nothing to see here" on the cart screen after removing items
+				String emptyCartText = driver.findElement(By.xpath("//android.widget.TextView[@text=\"Nothing to see here\"]"))
+						.getText();
+				if (emptyCartText.equals("Nothing to see here")) {
+					System.out.println("Test Passed: Cart is empty.");
+				} else {
+					System.out.println("Test Failed: Cart is not empty.");
+				}
+				driver.findElement(AppiumBy.xpath("//android.widget.TextView[@text=\"Tap anywhere to resume shopping\"]"))
+						.click();
+
+				driver.quit();
+				service.stop();
 	}
 	
 	private static void handleSplashScreen(AndroidDriver driver, WebDriverWait wait) {
