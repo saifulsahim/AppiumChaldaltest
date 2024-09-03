@@ -7,7 +7,6 @@ import java.time.Duration;
 import java.util.NoSuchElementException;
 
 import org.testng.annotations.Test;
-//import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -27,7 +26,7 @@ public class AppiumBasics {
 	@Test
 
 	public void ChalDalAutomation() throws MalformedURLException, InterruptedException {
-		
+
 		// Setting up and starting the Appium server programmatically
 		AppiumDriverLocalService service = new AppiumServiceBuilder()
 				.withAppiumJS(
@@ -39,18 +38,16 @@ public class AppiumBasics {
 		options.setDeviceName("Honor LLY-LX2");
 		options.setApp("C:\\Users\\Sahim\\eclipse-workspace\\Appium\\src\\test\\java\\resources\\Chaldal.apk");
 		options.setAutoGrantPermissions(true);
-		
-		// Initialize the driver
+
+		//1. Initialize the driver
 		AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
 
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		
-		//Open the Chaldal Application
-        System.out.println("Application launched successfully");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		//2. Open the Chaldal Application
+		System.out.println("App launched successfully");
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
 		handleSplashScreen(driver, wait);
-		//Clicking the search button
+		//3. Clicking the search button
 
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(AppiumBy.xpath("//android.widget.TextView[@text=\"Search\"]")));
@@ -58,12 +55,12 @@ public class AppiumBasics {
 
 		handleSplashScreen(driver, wait);
 
-		//Search for the item “toothbrush” 
+		//4. Search for the item “toothbrush”
 		driver.findElement(AppiumBy.xpath("//android.widget.EditText[@text=\"Search Products\"]"))
 				.sendKeys("toothbrush");
 		driver.hideKeyboard();
-		
-		// Scroll down to an item 
+
+		//5. Scroll down to an item
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator(
 				"new UiScrollable(new UiSelector().scrollable(true)).setMaxSearchSwipes(20).scrollIntoView(new UiSelector().text(\"Sensodyne Expert Brush\"));")));
@@ -79,32 +76,32 @@ public class AppiumBasics {
 
 		}
 
-		//Go to the cart screen from the top 
+		//6.  Go to the cart screen from the top
 		WebElement cart = wait.until(ExpectedConditions
 				.elementToBeClickable(AppiumBy.xpath("(//android.widget.TextView[@text=\"৳579\"])[2]")));
 		cart.click();
-		
-		//Empty the cart
 
-				wait.until(
-						ExpectedConditions.visibilityOfElementLocated(By.xpath("(//android.widget.TextView[@text=\"\"])[1]")));
-				driver.findElement(By.xpath("(//android.widget.TextView[@text=\"\"])[1]")).click();
+		//7. Empty the cart
 
-				// Verify text "Nothing to see here" on the cart screen after removing items
-				String emptyCartText = driver.findElement(By.xpath("//android.widget.TextView[@text=\"Nothing to see here\"]"))
-						.getText();
-				if (emptyCartText.equals("Nothing to see here")) {
-					System.out.println("Test Passed: Cart is empty.");
-				} else {
-					System.out.println("Test Failed: Cart is not empty.");
-				}
-				driver.findElement(AppiumBy.xpath("//android.widget.TextView[@text=\"Tap anywhere to resume shopping\"]"))
-						.click();
+		wait.until(
+				ExpectedConditions.visibilityOfElementLocated(By.xpath("(//android.widget.TextView[@text=\"\"])[1]")));
+		driver.findElement(By.xpath("(//android.widget.TextView[@text=\"\"])[1]")).click();
 
-				driver.quit();
-				service.stop();
+		//8. Verify text "Nothing to see here" on the cart screen after removing items
+		String emptyCartText = driver.findElement(By.xpath("//android.widget.TextView[@text=\"Nothing to see here\"]"))
+				.getText();
+		if (emptyCartText.equals("Nothing to see here")) {
+			System.out.println("Test Passed: Cart is empty.");
+		} else {
+			System.out.println("Test Failed: Cart is not empty.");
+		}
+		driver.findElement(AppiumBy.xpath("//android.widget.TextView[@text=\"Tap anywhere to resume shopping\"]"))
+				.click();
+
+		driver.quit();
+		service.stop();
 	}
-	
+
 	private static void handleSplashScreen(AndroidDriver driver, WebDriverWait wait) {
 		try {
 			wait.until(
