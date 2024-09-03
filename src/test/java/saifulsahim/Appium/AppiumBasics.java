@@ -74,7 +74,17 @@ public class AppiumBasics {
 		WebElement plusButton = driver.findElement(By.xpath(
 				"//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[5]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup"));
 
+		for (int i = 0; i < 3; i++) {
+			plusButton.click();
+
+		}
+
+		//Go to the cart screen from the top 
+		WebElement cart = wait.until(ExpectedConditions
+				.elementToBeClickable(AppiumBy.xpath("(//android.widget.TextView[@text=\"৳579\"])[2]")));
+		cart.click();
 	}
+	
 	private static void handleSplashScreen(AndroidDriver driver, WebDriverWait wait) {
 		try {
 			wait.until(
